@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ludmi.projet.controller.AddEmployeController">
+   <top>
+      <Label text="AJOUTER UN EMPLOYE" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <Pane prefHeight="362.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="209.0" layoutY="23.0" text="Id" visible="false" />
+            <TextField fx:id="tfId" layoutX="209.0" layoutY="39.0" visible="false" />
+            <Label layoutX="22.0" layoutY="14.0" text="Nom" />
+            <Label layoutX="19.0" layoutY="79.0" text="Prénom" />
+            <Label layoutX="21.0" layoutY="140.0" text="Poste" />
+            <Label layoutX="23.0" layoutY="202.0" text="Département" />
+            <Label layoutX="24.0" layoutY="268.0" text="Salaire" />
+            <TextField fx:id="tfFName" layoutX="19.0" layoutY="39.0" />
+            <TextField fx:id="tfName" layoutX="19.0" layoutY="96.0" />
+            <TextField fx:id="tfPoste" layoutX="21.0" layoutY="157.0" />
+            <TextField fx:id="tfDept" layoutX="22.0" layoutY="219.0" />
+            <TextField fx:id="tfSalary" layoutX="22.0" layoutY="285.0" />
+            <Button fx:id="btnSave" layoutX="71.0" layoutY="323.0" mnemonicParsing="false" onAction="#onSave" text="Button" />
+
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
