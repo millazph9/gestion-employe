@@ -1,19 +1,12 @@
-package ludmi.projet.controller;
+package ludmi.projet.composant;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import ludmi.projet.model.Employe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainController {
 

@@ -1,12 +1,9 @@
-package ludmi.projet.controller;
+package ludmi.projet.composant;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import ludmi.projet.model.Employe;
 import javafx.scene.control.TextField;
-
-
-import java.awt.*;
 
 public class AddEmployeController {
 
