@@ -3,10 +3,15 @@ package ludmi.projet.composant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ludmi.projet.app.Main;
 import ludmi.projet.model.Employe;
+
+import java.io.IOException;
 
 public class MainController {
 //kvzalbzilddkjdz
@@ -40,17 +45,36 @@ public class MainController {
 
     @FXML
     private void onAdd() {
-        System.out.println("Ajouter cliqué");
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/AddEmploye.fxml"));
+        try {
+            Scene scene = new Scene(loader.load());
+            Main.stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @FXML
     private void onEdit() {
-        System.out.println("Modifier cliqué");
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/EditEmploye.fxml"));
+        try {
+            Scene scene = new Scene(loader.load());
+            Main.stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Modifier");
+
     }
 
     @FXML
     private void onDelete() {
-        System.out.println("Supprimer cliqué");
+
+
+
     }
 
 

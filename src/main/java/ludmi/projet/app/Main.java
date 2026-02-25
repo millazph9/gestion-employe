@@ -5,16 +5,28 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import java.io.IOException;
+
+import static javafx.application.Application.launch;
+
+
+public class Main extends  Application{
+
+    public static Stage stage;
+
 
     @Override
     public void start(Stage stage) throws Exception {
+        Main.stage = stage;
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), 600, 500);
         stage.setTitle("Gestion des employés - TEST 123");
         stage.setScene(scene);
         stage.show();
     }
+
+
+
 
     public static void main(String[] args) {
         launch(args);
