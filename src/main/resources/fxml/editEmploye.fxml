@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.EditEmploye"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ludmi.projet.composant.EditEmployeController">
+   <children>
+      <BorderPane layoutX="100.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="204.0" layoutY="14.0" text="MODIFIER UN EMPLOYE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Pane layoutY="51.0" prefHeight="352.0" prefWidth="604.0">
+         <children>
+            <Label layoutX="209.0" layoutY="23.0" text="Id" visible="false" />
+            <TextField fx:id="tfId" layoutX="209.0" layoutY="39.0" visible="false" />
+            <Label layoutX="22.0" layoutY="9.0" text="Nom" />
+            <Label layoutX="19.0" layoutY="72.0" text="Prénom" />
+            <Label layoutX="21.0" layoutY="132.0" text="Poste" />
+            <Label layoutX="23.0" layoutY="192.0" text="Département" />
+            <Label layoutX="24.0" layoutY="250.0" text="Salaire" />
+            <TextField fx:id="tfFNameEdit" layoutX="19.0" layoutY="25.0" />
+            <TextField fx:id="tfNameEdit" layoutX="19.0" layoutY="90.0" />
+            <TextField fx:id="tfPosteEdit" layoutX="21.0" layoutY="150.0" />
+            <TextField fx:id="tfDeptEdit" layoutX="22.0" layoutY="212.0" />
+            <TextField fx:id="tfSalaryEdit" layoutX="22.0" layoutY="267.0" />
+            <Button fx:id="btnSaveEdit" layoutX="23.0" layoutY="306.0" mnemonicParsing="false" onAction="#onSaveEdit" prefHeight="25.0" prefWidth="70.0" text="Modifier" />
+            <Button fx:id="btnCloseEdit" layoutX="97.0" layoutY="306.0" mnemonicParsing="false" onAction="#onCloseEdit" prefHeight="25.0" prefWidth="70.0" text="Annuler" />
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
