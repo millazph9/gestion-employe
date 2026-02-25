@@ -1,9 +1,15 @@
 package ludmi.projet.composant;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ludmi.projet.app.Main;
 import ludmi.projet.model.Employe;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class AddEmployeController {
 
@@ -36,5 +42,19 @@ public class AddEmployeController {
 
         ((Stage) tfName.getScene().getWindow()).close();
 
+    }
+
+    @FXML
+    private void onClose() {
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/Main.fxml"));
+        try {
+            Scene scene = new Scene(loader.load());
+            Main.stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("annuler");
     }
 }
