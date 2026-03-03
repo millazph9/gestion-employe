@@ -14,47 +14,66 @@ import java.io.IOException;
 public class AddEmployeController {
 
     //j'appelle chaque champs
-    @FXML TextField tfId;
     @FXML TextField tfFName;
     @FXML TextField tfName;
     @FXML TextField tfPoste;
     @FXML TextField tfDept;
     @FXML TextField tfSalary;
 
-    private Employe resultat;
 
-    public Employe getResultat() {
-        return resultat;
+    //Stockage de la reference (des données) qui sera envoyé dans le MainController pour être validée
+    private MainController mainController;
+
+    //Methode pour valider et présenter les données
+    public void setMainController(MainController mainController){
+        this.mainController = mainController;
     }
-
 
     @FXML
     private void onSave(){
 
-        int id = Integer.parseInt(tfId.getText());
         String nom = tfFName.getText();
         String prenom = tfName.getText();
         String poste = tfPoste.getText();
         String departement = tfDept.getText();
         double salary = Double.parseDouble(tfSalary.getText());
 
-        resultat = new Employe(id, nom, prenom, poste, departement, salary);
+        int id = mainController.getEmployes().size() + 1;
 
-        ((Stage) tfName.getScene().getWindow()).close();
+        //Création de l'employé
+        Employe employe = new Employe(id, nom, prenom, poste, departement, salary);
+
+        mainController.add(employe);
+
+        retournerMain();
+
+        //((Stage) tfName.getScene().getWindow()).close();
+
+
 
     }
+
+
 
     @FXML
     private void onClose() {
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/Main.fxml"));
-        try {
+        retournerMain();
+        System.out.println("annuler");
+    }
+
+    private void retournerMain(){
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
+
+        try{
             Scene scene = new Scene(loader.load());
+
+            MainController mc = loader.getController();
+            mc.setEmployes(mainController.getEmployes());
+
             Main.stage.setScene(scene);
-        } catch (IOException e) {
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println("annuler");
     }
 }

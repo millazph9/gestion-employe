@@ -19,7 +19,7 @@ public class Main extends  Application{
     public void start(Stage stage) throws Exception {
         Main.stage = stage;
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 500);
+        Scene scene = new Scene(loader.load());
         stage.setTitle("Gestion des employés - TEST 123");
         stage.setScene(scene);
         stage.show();

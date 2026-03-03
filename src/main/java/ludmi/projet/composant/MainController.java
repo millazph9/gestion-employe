@@ -43,11 +43,19 @@ public class MainController {
 
     }
 
+    /**
+     * la methode onAdd permet la redirection vers le formulaire ajout employé
+     */
     @FXML
     private void onAdd() {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/AddEmploye.fxml"));
         try {
             Scene scene = new Scene(loader.load());
+
+            //Création nouveau controller avec nouvelles données pour remplacer l'ancien
+            AddEmployeController addEmployeController = loader.getController();
+            addEmployeController.setMainController(this);
+
             Main.stage.setScene(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -55,29 +63,63 @@ public class MainController {
 
     }
 
+    /**
+     *
+     * @param employes methode setEmployes() pour connecter la liste des employés en mémoire avec le tableau
+     */
+
+    public void setEmployes(ObservableList<Employe> employes){
+        this.employes = employes; // la liste des employés en mémoire
+        tableEmployes.setItems(this.employes); // branche le tableau sur cette liste pour qu'elle soit visible
+
+    }
+
+    public ObservableList<Employe> getEmployes(){
+        return employes;
+    }
+
+
+
     @FXML
     private void onEdit() {
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/EditEmploye.fxml"));
-        try {
-            Scene scene = new Scene(loader.load());
-            Main.stage.setScene(scene);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        Employe selection = tableEmployes.getSelectionModel().getSelectedItem();
+        if(selection == null){
+            System.out.println("Pas de séléction");
+        }else{
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/EditEmploye.fxml"));
+            try {
+                Scene scene = new Scene(loader.load());
+
+                EditEmployeController editEmployeController = loader.getController();
+                editEmployeController.setMainController(this);
+
+                Main.stage.setScene(scene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        System.out.println("Modifier");
+        //System.out.println("Modifier");
 
+    }
+
+    public void add(Employe employe) {
+
+        employes.add(employe);
     }
 
     @FXML
     private void onDelete() {
 
-
+       Employe selection = tableEmployes.getSelectionModel().getSelectedItem();
+       if(selection == null){
+           System.out.println("Pas de selection");
+       }else{
+            employes.remove(selection);
+       }
 
     }
-
-
 
 
 
