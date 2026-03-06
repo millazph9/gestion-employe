@@ -4,8 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ludmi.projet.database.DatabaseConnection;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static javafx.application.Application.launch;
 
@@ -17,6 +21,9 @@ public class Main extends  Application{
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        DatabaseConnection.initDatabase();
+
         Main.stage = stage;
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
         Scene scene = new Scene(loader.load());
@@ -28,7 +35,8 @@ public class Main extends  Application{
 
 
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws SQLException {
+        launch(args); // <-- ferme l'application
+
     }
 }

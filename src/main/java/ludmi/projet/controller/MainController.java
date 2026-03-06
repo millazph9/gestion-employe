@@ -1,4 +1,4 @@
-package ludmi.projet.composant;
+package ludmi.projet.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ludmi.projet.app.Main;
+import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
 import java.io.IOException;
@@ -33,11 +34,13 @@ public class MainController {
         colPoste.setCellValueFactory(new PropertyValueFactory<Employe, String>("poste"));
         colDept.setCellValueFactory(new PropertyValueFactory<Employe, String>("departement"));
         colSalaire.setCellValueFactory(new PropertyValueFactory<Employe, Double>("salaire"));
-        Employe employe1 = new Employe(0, "Ludmilla", "Zephir", "Dev", "Num", 2000);
-        Employe employe2 = new Employe(0, "Yarina", "Zephir", "Comptable", "Finance", 3000);
-        employes.add(employe1);
-        employes.add(employe2);
+        //Employe employe1 = new Employe(0, "Ludmilla", "Zephir", "Dev", "Num", 2000);
+        //Employe employe2 = new Employe(0, "Yarina", "Zephir", "Comptable", "Finance", 3000);
+        //employes.add(employe1);
+        //employes.add(employe2);
+        employes.addAll(DatabaseConnection.getAllSelect());
         tableEmployes.setItems(employes);
+
 
 
 
@@ -93,6 +96,8 @@ public class MainController {
 
                 EditEmployeController editEmployeController = loader.getController();
                 editEmployeController.setMainController(this);
+                editEmployeController.setEmploye(selection);
+
 
                 Main.stage.setScene(scene);
             } catch (IOException e) {
@@ -109,6 +114,10 @@ public class MainController {
         employes.add(employe);
     }
 
+    public void delete(int id){
+        DatabaseConnection.deleteEmploye(id);
+    }
+
     @FXML
     private void onDelete() {
 
@@ -116,7 +125,9 @@ public class MainController {
        if(selection == null){
            System.out.println("Pas de selection");
        }else{
+            delete(selection.getId());
             employes.remove(selection);
+
        }
 
     }

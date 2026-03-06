@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ludmi.projet.composant.EditEmployeController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ludmi.projet.controller.EditEmployeController">
    <children>
       <BorderPane layoutX="100.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" />
@@ -30,7 +30,7 @@
             <TextField fx:id="tfNameEdit" layoutX="19.0" layoutY="90.0" />
             <TextField fx:id="tfPosteEdit" layoutX="21.0" layoutY="150.0" />
             <TextField fx:id="tfDeptEdit" layoutX="22.0" layoutY="212.0" />
-            <TextField fx:id="tfSalaryEdit" layoutX="22.0" layoutY="267.0" />
+            <TextField fx:id="tfSalaireEdit" layoutX="22.0" layoutY="267.0" />
             <Button fx:id="btnSaveEdit" layoutX="23.0" layoutY="306.0" mnemonicParsing="false" onAction="#onSaveEdit" prefHeight="25.0" prefWidth="70.0" text="Modifier" />
             <Button fx:id="btnCloseEdit" layoutX="97.0" layoutY="306.0" mnemonicParsing="false" onAction="#onCloseEdit" prefHeight="25.0" prefWidth="70.0" text="Annuler" />
          </children>

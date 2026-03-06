@@ -7,14 +7,14 @@ import javafx.collections.ObservableList;
 public class Employe {
 
     private int id;
-    private String prenom;
     private String nom;
+    private String prenom;
     private String poste;
     private String departement;
     private double salaire;
 
 
-    public Employe(int id, String prenom, String nom, String poste, String departement, double salaire) {
+    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;

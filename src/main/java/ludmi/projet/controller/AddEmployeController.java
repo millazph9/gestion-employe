@@ -1,11 +1,10 @@
-package ludmi.projet.composant;
+package ludmi.projet.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import ludmi.projet.app.Main;
+import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 import javafx.scene.control.TextField;
 
@@ -36,13 +35,14 @@ public class AddEmployeController {
         String prenom = tfName.getText();
         String poste = tfPoste.getText();
         String departement = tfDept.getText();
-        double salary = Double.parseDouble(tfSalary.getText());
+        double salaire = Double.parseDouble(tfSalary.getText());
 
-        int id = mainController.getEmployes().size() + 1;
+        //int id = mainController.getEmployes().size() + 1;
 
         //Création de l'employé
-        Employe employe = new Employe(id, nom, prenom, poste, departement, salary);
+        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire);
 
+        DatabaseConnection.addEmploye(employe);
         mainController.add(employe);
 
         retournerMain();
@@ -69,8 +69,7 @@ public class AddEmployeController {
             Scene scene = new Scene(loader.load());
 
             MainController mc = loader.getController();
-            mc.setEmployes(mainController.getEmployes());
-
+            mc.setEmployes(DatabaseConnection.getAllSelect());
             Main.stage.setScene(scene);
         }catch (IOException e) {
             throw new RuntimeException(e);
