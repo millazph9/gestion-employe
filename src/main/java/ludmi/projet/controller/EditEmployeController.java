@@ -3,19 +3,22 @@ package ludmi.projet.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class EditEmployeController {
 
     @FXML TextField tfFNameEdit;
     @FXML TextField tfNameEdit;
-    @FXML TextField tfPosteEdit;
-    @FXML TextField tfDeptEdit;
+    @FXML ComboBox<String> cbPosteEdit;
+    @FXML ComboBox<String> cbDeptEdit;
     @FXML TextField tfSalaireEdit;
 
     public MainController mainController;
@@ -23,6 +26,36 @@ public class EditEmployeController {
 
     public void setMainController(MainController mainController){
         this.mainController = mainController;
+    }
+
+
+    List<String> postes = Arrays.asList(
+            "Developpeur web",
+            "Ingénieur DevOps",
+            "Testeur",
+            "Architecte logiciel",
+            "Designer",
+            "Graphiste",
+            "Chef de projet",
+            "Responsable RH",
+            "Comptable",
+            "Assistant administratif",
+            "Commercial"
+    );
+
+    List<String> departements = Arrays.asList(
+            "Informatique",
+            "Design",
+            "Management",
+            "Ressources humaines",
+            "Finances",
+            "Commercial",
+            "Infrastructure"
+    );
+
+    public void initialize(){
+        cbPosteEdit.getItems().addAll(postes);
+        cbDeptEdit.getItems().addAll(departements);
     }
 
     /**
@@ -33,8 +66,8 @@ public class EditEmployeController {
         this.selectEmploye = employe;
         tfFNameEdit.setText(employe.getNom());
         tfNameEdit.setText(employe.getPrenom());
-        tfPosteEdit.setText(employe.getPoste());
-        tfDeptEdit.setText(employe.getDepartement());
+        cbPosteEdit.setValue(employe.getPoste());
+        cbDeptEdit.setValue(employe.getDepartement());
         tfSalaireEdit.setText(String.valueOf(employe.getSalaire()));
     }
 
@@ -48,7 +81,7 @@ public class EditEmployeController {
 
     public void onSaveEdit() {
 
-        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), tfPosteEdit.getText(), tfDeptEdit.getText(), Double.parseDouble(tfSalaireEdit.getText()));
+        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()));
         DatabaseConnection.editEmploye(employe);
         retourMain();
     }

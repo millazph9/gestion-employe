@@ -14,6 +14,8 @@ import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainController {
 //J'appelle la Table et ses colonnes
@@ -28,6 +30,7 @@ public class MainController {
 
     //création d'une liste
     private ObservableList<Employe> employes = FXCollections.observableArrayList();
+
 
     public void initialize() {
         //Je demande à afficher dans la colonne prénom la valeur prénom à l'aide de l'outil PropertyValueFactory ainsi de suite

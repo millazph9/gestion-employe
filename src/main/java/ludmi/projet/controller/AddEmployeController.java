@@ -3,21 +3,56 @@ package ludmi.projet.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddEmployeController {
 
     //j'appelle chaque champs
     @FXML TextField tfFName;
     @FXML TextField tfName;
-    @FXML TextField tfPoste;
-    @FXML TextField tfDept;
+    @FXML ComboBox<String> cbPoste;
+    @FXML ComboBox<String> cbDept;
     @FXML TextField tfSalary;
+
+
+    private List<String> postes = Arrays.asList(
+            "Developpeur web",
+            "Ingénieur DevOps",
+            "Testeur",
+            "Architecte logiciel",
+            "Designer",
+            "Graphiste",
+            "Chef de projet",
+            "Responsable RH",
+            "Comptable",
+            "Assistant administratif",
+            "Commercial"
+
+    );
+
+    private List<String> departements = Arrays.asList(
+            "Informatique",
+            "Design",
+            "Management",
+            "Ressources humaines",
+            "Finances",
+            "Commercial",
+            "Infrastructure"
+
+    );
+
+    public void initialize(){
+        cbPoste.getItems().addAll(postes);
+        cbDept.getItems().addAll(departements);
+    }
 
 
     //Stockage de la reference (des données) qui sera envoyé dans le MainController pour être validée
@@ -33,8 +68,8 @@ public class AddEmployeController {
 
         String nom = tfFName.getText();
         String prenom = tfName.getText();
-        String poste = tfPoste.getText();
-        String departement = tfDept.getText();
+        String poste = cbPoste.getValue();
+        String departement = cbDept.getValue();
         double salaire = Double.parseDouble(tfSalary.getText());
 
         //int id = mainController.getEmployes().size() + 1;
