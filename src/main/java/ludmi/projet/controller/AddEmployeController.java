@@ -59,7 +59,6 @@ public class AddEmployeController {
     private void onClose() {
 
         retournerMain();
-        System.out.println("annuler");
     }
 
     private void retournerMain(){
@@ -67,9 +66,6 @@ public class AddEmployeController {
 
         try{
             Scene scene = new Scene(loader.load());
-
-            MainController mc = loader.getController();
-            mc.setEmployes(DatabaseConnection.getAllSelect());
             Main.stage.setScene(scene);
         }catch (IOException e) {
             throw new RuntimeException(e);

@@ -44,7 +44,6 @@ public class EditEmployeController {
 
 
         retourMain();
-        System.out.println("Annuler");
     }
 
     public void onSaveEdit() {
@@ -59,8 +58,6 @@ public class EditEmployeController {
 
         try{
             Scene scene = new Scene(loader.load());
-            MainController mainController = loader.getController();
-            mainController.setEmployes(DatabaseConnection.getAllSelect());
             Main.stage.setScene(scene);
 
         } catch (IOException e) {

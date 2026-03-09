@@ -24,11 +24,11 @@ public class Main extends  Application{
 
         DatabaseConnection.initDatabase();
 
-        Main.stage = stage;
+        Main.stage = stage; // fenêtre
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load()); //création d'une scene et stockage fichier fxml stocké dans loader
         stage.setTitle("Gestion des employés - TEST 123");
-        stage.setScene(scene);
+        stage.setScene(scene); //affichage de la scene
         stage.show();
     }
 

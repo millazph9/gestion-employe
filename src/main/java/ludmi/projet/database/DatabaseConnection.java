@@ -111,7 +111,7 @@ public class DatabaseConnection {
 
     public static ObservableList<Employe> getAllSelect(){
 
-        ObservableList<Employe> Liste = FXCollections.observableArrayList();
+        ObservableList<Employe> liste = FXCollections.observableArrayList();
 
         try(Connection conn = getConnection();
             Statement stmt = conn.createStatement();
@@ -120,12 +120,40 @@ public class DatabaseConnection {
 
             while(res.next()){
                 Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"));
-                Liste.add(employe);
+                liste.add(employe);
             }
         }catch(SQLException e){
             throw new RuntimeException();
         }
-        return Liste;
+        return liste;
+    }
+
+    public static ObservableList<Employe> getSelect(String recherche){
+
+        ObservableList<Employe> list = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ?";
+
+        try (Connection conn = getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+
+            stmt.setString(1, "%" + recherche + "%");
+            stmt.setString(2, "%" + recherche + "%");
+            stmt.setString(3, "%" + recherche + "%");
+            stmt.setString(4, "%" + recherche + "%");
+
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()){
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"));
+                list.add(e);
+            }
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
     }
 
 
