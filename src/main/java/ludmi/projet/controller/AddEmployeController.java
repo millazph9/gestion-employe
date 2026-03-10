@@ -3,6 +3,7 @@ package ludmi.projet.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class AddEmployeController {
 
@@ -66,11 +68,44 @@ public class AddEmployeController {
     @FXML
     private void onSave(){
 
+        TextField[] champs = {tfFName, tfName, tfSalary};
+
+
+
+        for(TextField champ : champs){
+            if(champ.getText().isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Attention");
+                alert.setContentText("Veuillez remplir les champs");
+                alert.showAndWait();
+                return;
+            }
+        }
+
+        if(cbPoste.getValue() == null || cbDept.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setContentText("Veuillez remplir les champs");
+            alert.showAndWait();
+            return;
+        }
+
+
         String nom = tfFName.getText();
         String prenom = tfName.getText();
         String poste = cbPoste.getValue();
         String departement = cbDept.getValue();
         double salaire = Double.parseDouble(tfSalary.getText());
+
+        if(salaire <= 0 ){
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setContentText("Veuillez inscrire un salaire approprié");
+            alert.showAndWait();
+            return;
+
+        }
 
         //int id = mainController.getEmployes().size() + 1;
 
