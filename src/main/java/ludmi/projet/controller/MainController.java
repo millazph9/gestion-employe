@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -83,21 +85,21 @@ public class MainController {
         employes.add(employe);
     }
 
-    /**
-     *
-     * @param employes methode setEmployes() pour connecter la liste des employés en mémoire avec le tableau
-     */
+    ///**
+     //*
+     //* @param employes methode setEmployes() pour connecter la liste des employés en mémoire avec le tableau
+     //*/
 
-    public void setEmployes(ObservableList<Employe> employes){
-        this.employes = employes; // la liste des employés en mémoire
-        tableEmployes.setItems(this.employes); // branche le tableau sur cette liste pour qu'elle soit visible
+    //public void setEmployes(ObservableList<Employe> employes){
+        //this.employes = employes; // la liste des employés en mémoire
+        //tableEmployes.setItems(this.employes); // branche le tableau sur cette liste pour qu'elle soit visible
 
-    }
+    //}
 
-    public ObservableList<Employe> getEmployes(){
+    //public ObservableList<Employe> getEmployes(){
 
-        return employes;
-    }
+        //return employes;
+    //}
 
 
 
@@ -141,8 +143,14 @@ public class MainController {
        if(selection == null){
            System.out.println("Pas de selection");
        }else{
-            delete(selection.getId());
-            employes.remove(selection);
+
+
+            int dialog = JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer cet employé ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            if(dialog == JOptionPane.YES_OPTION){
+                delete(selection.getId());
+                employes.remove(selection);
+            }
+
 
        }
 

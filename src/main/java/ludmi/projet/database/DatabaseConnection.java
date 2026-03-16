@@ -109,6 +109,12 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     *
+     * @return list des employés
+     * La methode getAllSelect affiche tous les employés enregistré dans la base de données
+     */
+
     public static ObservableList<Employe> getAllSelect(){
 
         ObservableList<Employe> liste = FXCollections.observableArrayList();

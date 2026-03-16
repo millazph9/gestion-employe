@@ -27,7 +27,7 @@ public class Main extends  Application{
         Main.stage = stage; // fenêtre
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
         Scene scene = new Scene(loader.load()); //création d'une scene et stockage fichier fxml stocké dans loader
-        stage.setTitle("Gestion des employés - TEST 123");
+        stage.setTitle("Gestion des employés");
         stage.setScene(scene); //affichage de la scene
         stage.show();
     }
