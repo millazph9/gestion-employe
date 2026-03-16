@@ -23,6 +23,7 @@ public class AddEmployeController {
     @FXML ComboBox<String> cbPoste;
     @FXML ComboBox<String> cbDept;
     @FXML TextField tfSalary;
+    @FXML ComboBox<String> cbContrat;
 
 
     private List<String> postes = Arrays.asList(
@@ -51,9 +52,20 @@ public class AddEmployeController {
 
     );
 
+    private List<String> contrat = Arrays.asList(
+            "CDD",
+            "CDI",
+            "Interminent",
+            "Permanent",
+            "Contrat d'apprentissage",
+            "Contrat de professionnalisation",
+            "CUI"
+    );
+
     public void initialize(){
         cbPoste.getItems().addAll(postes);
         cbDept.getItems().addAll(departements);
+        cbContrat.getItems().addAll(contrat);
     }
 
 
@@ -90,12 +102,20 @@ public class AddEmployeController {
             return;
         }
 
+        if(cbContrat.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setContentText("Veuillez remplir le champ");
+            alert.showAndWait();
+        }
+
 
         String nom = tfFName.getText();
         String prenom = tfName.getText();
         String poste = cbPoste.getValue();
         String departement = cbDept.getValue();
         double salaire = Double.parseDouble(tfSalary.getText());
+        String contrat = cbContrat.getValue();
 
         if(salaire <= 0 ){
 
@@ -110,7 +130,7 @@ public class AddEmployeController {
         //int id = mainController.getEmployes().size() + 1;
 
         //Création de l'employé
-        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire);
+        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat);
 
         DatabaseConnection.addEmploye(employe);
         mainController.add(employe);

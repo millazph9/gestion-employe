@@ -27,6 +27,7 @@ public class MainController {
     @FXML TableColumn<Employe, String> colPoste;
     @FXML TableColumn<Employe, String> colDept;
     @FXML TableColumn<Employe, Double> colSalaire;
+    @FXML TableColumn<Employe, String> colContrat;
     @FXML TextField tfSearch;
 
 
@@ -41,6 +42,7 @@ public class MainController {
         colPoste.setCellValueFactory(new PropertyValueFactory<Employe, String>("poste"));
         colDept.setCellValueFactory(new PropertyValueFactory<Employe, String>("departement"));
         colSalaire.setCellValueFactory(new PropertyValueFactory<Employe, Double>("salaire"));
+        colContrat.setCellValueFactory(new PropertyValueFactory<Employe, String>("contrat"));
         //Employe employe1 = new Employe(0, "Ludmilla", "Zephir", "Dev", "Num", 2000);
         //Employe employe2 = new Employe(0, "Yarina", "Zephir", "Comptable", "Finance", 3000);
         //employes.add(employe1);

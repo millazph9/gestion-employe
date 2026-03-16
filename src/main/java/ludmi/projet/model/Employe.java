@@ -12,15 +12,16 @@ public class Employe {
     private String poste;
     private String departement;
     private double salaire;
+    private String contrat;
 
-
-    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire) {
+    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire, String contrat) {
         this.id = id;
-        this.prenom = prenom;
         this.nom = nom;
-        this.salaire = salaire;
+        this.prenom = prenom;
         this.poste = poste;
         this.departement = departement;
+        this.salaire = salaire;
+        this.contrat = contrat;
     }
 
 
@@ -72,10 +73,18 @@ public class Employe {
         this.departement = departement;
     }
 
+    public String getContrat() {
+        return contrat;
+    }
+
+    public void setContrat(String contrat) {
+        this.contrat = contrat;
+    }
+
+
     public String toString(){
         return "Prenom : " + this.prenom + " Nom : " + this.nom;
     }
-
 
 
 }

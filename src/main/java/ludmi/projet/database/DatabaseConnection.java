@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ludmi.projet.model.Employe;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseConnection {
 
@@ -23,7 +21,8 @@ public class DatabaseConnection {
                nom TEXT,
                poste TEXT,
                departement TEXT,
-               salaire REAL
+               salaire REAL,
+               contrat TEXT
                )
                """;
 
@@ -43,7 +42,7 @@ public class DatabaseConnection {
 
     public static void addEmploye(Employe employe){
 
-        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat) VALUES (?,?,?,?,?, ?)";
 
         try(Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -53,6 +52,7 @@ public class DatabaseConnection {
             stmt.setString(3, employe.getPoste());
             stmt.setString(4, employe.getDepartement());
             stmt.setDouble(5, employe.getSalaire());
+            stmt.setString(6, employe.getContrat());
             stmt.executeUpdate();
 
             }
@@ -115,7 +115,7 @@ public class DatabaseConnection {
      * La methode getAllSelect affiche tous les employés enregistré dans la base de données
      */
 
-    public static ObservableList<Employe> getAllSelect(){
+    public static ObservableList<Employe> getAllSelect() {
 
         ObservableList<Employe> liste = FXCollections.observableArrayList();
 
@@ -125,7 +125,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery("SELECT * from employe");
 
             while(res.next()){
-                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"));
+                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"));
                 liste.add(employe);
             }
         }catch(SQLException e){
@@ -138,7 +138,7 @@ public class DatabaseConnection {
 
         ObservableList<Employe> list = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ?";
+        String sql = "SELECT * FROM employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ?";
 
         try (Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -148,11 +148,12 @@ public class DatabaseConnection {
             stmt.setString(2, "%" + recherche + "%");
             stmt.setString(3, "%" + recherche + "%");
             stmt.setString(4, "%" + recherche + "%");
+            stmt.setString(5, "%" + recherche + "%");
 
             ResultSet res = stmt.executeQuery();
 
             while (res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"));
                 list.add(e);
             }
 

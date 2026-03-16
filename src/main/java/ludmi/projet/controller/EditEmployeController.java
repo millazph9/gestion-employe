@@ -19,6 +19,7 @@ public class EditEmployeController {
     @FXML TextField tfNameEdit;
     @FXML ComboBox<String> cbPosteEdit;
     @FXML ComboBox<String> cbDeptEdit;
+    @FXML ComboBox<String> cbContratEdit;
     @FXML TextField tfSalaireEdit;
 
     public MainController mainController;
@@ -53,9 +54,21 @@ public class EditEmployeController {
             "Infrastructure"
     );
 
+    List<String> contrats = Arrays.asList(
+            "CDD",
+            "CDI",
+            "Interminent",
+            "Permanent",
+            "Contrat d'apprentissage",
+            "Contrat de professionnalisation",
+            "CUI"
+
+    );
+
     public void initialize(){
         cbPosteEdit.getItems().addAll(postes);
         cbDeptEdit.getItems().addAll(departements);
+        cbContratEdit.getItems().addAll(contrats);
     }
 
     /**
@@ -69,6 +82,7 @@ public class EditEmployeController {
         cbPosteEdit.setValue(employe.getPoste());
         cbDeptEdit.setValue(employe.getDepartement());
         tfSalaireEdit.setText(String.valueOf(employe.getSalaire()));
+        cbContratEdit.setValue(employe.getContrat());
     }
 
 
@@ -82,7 +96,7 @@ public class EditEmployeController {
     public void onSaveEdit() {
 
 
-        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()));
+        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue());
         DatabaseConnection.editEmploye(employe);
         retourMain();
     }
