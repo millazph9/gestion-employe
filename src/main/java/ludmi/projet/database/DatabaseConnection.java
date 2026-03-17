@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ludmi.projet.model.Employe;
 import java.sql.*;
+import java.time.LocalDate;
 
 public class DatabaseConnection {
 
@@ -22,7 +23,7 @@ public class DatabaseConnection {
                poste TEXT,
                departement TEXT,
                salaire REAL,
-               contrat TEXT
+              
                )
                """;
 
@@ -42,7 +43,7 @@ public class DatabaseConnection {
 
     public static void addEmploye(Employe employe){
 
-        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat) VALUES (?,?,?,?,?, ?)";
+        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat, dateRecrutement) VALUES (?,?,?,?,?,?,?)";
 
         try(Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -53,6 +54,7 @@ public class DatabaseConnection {
             stmt.setString(4, employe.getDepartement());
             stmt.setDouble(5, employe.getSalaire());
             stmt.setString(6, employe.getContrat());
+            stmt.setString(7, employe.getDateRecrutement().toString());
             stmt.executeUpdate();
 
             }
@@ -89,7 +91,7 @@ public class DatabaseConnection {
      */
 
     public static void editEmploye(Employe employe){
-        String sql = "UPDATE employe SET nom = ?, prenom = ?, poste = ?, departement = ?, salaire = ? WHERE id = ?" ;
+        String sql = "UPDATE employe SET nom = ?, prenom = ?, poste = ?, departement = ?, salaire = ?, contrat = ?, dateRecrutement = ? WHERE id = ?" ;
 
         try(Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -101,6 +103,8 @@ public class DatabaseConnection {
             stmt.setString(4, employe.getDepartement());
             stmt.setDouble(5, employe.getSalaire());
             stmt.setInt(6, employe.getId());
+            stmt.setString(7, employe.getContrat());
+            stmt.setString(8, employe.getDateRecrutement().toString());
 
             stmt.executeUpdate();
 
@@ -125,7 +129,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery("SELECT * from employe");
 
             while(res.next()){
-                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"));
+                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
                 liste.add(employe);
             }
         }catch(SQLException e){
@@ -134,11 +138,11 @@ public class DatabaseConnection {
         return liste;
     }
 
-    public static ObservableList<Employe> getSelect(String recherche){
+    public static ObservableList<Employe> getSelect(String recherche, String departement){
 
         ObservableList<Employe> list = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ?";
+        String sql = "SELECT * FROM employe WHERE (nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ?) AND departement = ?";
 
         try (Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -149,11 +153,13 @@ public class DatabaseConnection {
             stmt.setString(3, "%" + recherche + "%");
             stmt.setString(4, "%" + recherche + "%");
             stmt.setString(5, "%" + recherche + "%");
+            stmt.setString(6, departement);
+
 
             ResultSet res = stmt.executeQuery();
 
             while (res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
                 list.add(e);
             }
 
@@ -162,6 +168,91 @@ public class DatabaseConnection {
         }
         return list;
     }
+
+    public static ObservableList<Employe> getSelect(String recherche){
+
+        ObservableList<Employe> list = FXCollections.observableArrayList();
+
+        String sql = "SELECT * from employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ?";
+
+        try(
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            stmt.setString(1, "%" + recherche + "%");
+            stmt.setString(2, "%" + recherche + "%");
+            stmt.setString(3, "%" + recherche + "%");
+            stmt.setString(4, "%" + recherche + "%");
+            stmt.setString(5, "%" + recherche + "%");
+
+            ResultSet res = stmt.executeQuery();
+
+            while(res.next()){
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
+                list.add(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
+    /**
+     *
+     * @param nom de l'employé
+     * @param prenom de l'employé
+     * @return vrai ou faux si l'employé existe déjà dans la BDD
+     */
+
+    public static boolean select(String nom, String prenom) {
+        String sql = "SELECT nom, prenom FROM employe WHERE nom = ? AND prenom = ?";
+
+
+        try (
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+        ) {
+
+            stmt.setString(1, nom);
+            stmt.setString(2, prenom);
+
+            ResultSet res = stmt.executeQuery();
+
+            return res.next();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+    //public static Employe readEmploye(int id){
+
+       // String sql = "SELECT * FROM employe WHERE id = ?";
+
+       // Employe em = null;
+
+       // try(
+             //   Connection conn = getConnection();
+              //  PreparedStatement stmt = conn.prepareStatement(sql);
+             //   ) {
+
+           // stmt.setInt(1, id);
+
+          //  ResultSet res = stmt.executeQuery();
+
+          //  while(res.next()){
+            //    em = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
+          //  }
+
+       // } catch (SQLException e) {
+            //throw new RuntimeException(e);
+       // }
+
+       // return em;
+    //}
 
 
 }

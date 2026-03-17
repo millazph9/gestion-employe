@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Employe {
 
     private int id;
@@ -13,8 +16,9 @@ public class Employe {
     private String departement;
     private double salaire;
     private String contrat;
+    private LocalDate dateRecrutement;
 
-    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire, String contrat) {
+    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire, String contrat, LocalDate dateRecrutement) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -22,6 +26,7 @@ public class Employe {
         this.departement = departement;
         this.salaire = salaire;
         this.contrat = contrat;
+        this.dateRecrutement = dateRecrutement;
     }
 
 
@@ -81,6 +86,13 @@ public class Employe {
         this.contrat = contrat;
     }
 
+    public LocalDate getDateRecrutement() {
+        return dateRecrutement;
+    }
+
+    public void setDateRecrutement(LocalDate dateRecrutement) {
+        this.dateRecrutement = dateRecrutement;
+    }
 
     public String toString(){
         return "Prenom : " + this.prenom + " Nom : " + this.nom;

@@ -5,12 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class AddEmployeController {
     @FXML ComboBox<String> cbDept;
     @FXML TextField tfSalary;
     @FXML ComboBox<String> cbContrat;
+    @FXML DatePicker datePickerRecrutement;
+
+    private Employe e;
 
 
     private List<String> postes = Arrays.asList(
@@ -114,26 +119,42 @@ public class AddEmployeController {
         String prenom = tfName.getText();
         String poste = cbPoste.getValue();
         String departement = cbDept.getValue();
-        double salaire = Double.parseDouble(tfSalary.getText());
+        double salaire;
         String contrat = cbContrat.getValue();
+        LocalDate dateRecrutement = datePickerRecrutement.getValue();
 
-        if(salaire <= 0 ){
+       try{
+           salaire = Double.parseDouble(tfSalary.getText());
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Attention");
-            alert.setContentText("Veuillez inscrire un salaire approprié");
-            alert.showAndWait();
-            return;
+           if(salaire <= 0){
 
-        }
+               Alert alert = new Alert(Alert.AlertType.WARNING);
+               alert.setTitle("Attention");
+               alert.setContentText("Veuillez inscrire un salaire approprié");
+               alert.showAndWait();
+               return;
+
+           }
+       }catch(NumberFormatException e){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+           alert.setTitle("Attention");
+           alert.setContentText("Veuillez inscrire un salaire approprié");
+           alert.showAndWait();
+           return;
+
+       }
+
 
         //int id = mainController.getEmployes().size() + 1;
 
         //Création de l'employé
-        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat);
+        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat, dateRecrutement);
 
+       if(DatabaseConnection.select(nom, prenom)){
+           System.out.println("non");
+       }else{
         DatabaseConnection.addEmploye(employe);
-        mainController.add(employe);
+        mainController.add(employe);}
 
         retournerMain();
 

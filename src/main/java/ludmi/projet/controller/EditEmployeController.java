@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
@@ -21,6 +22,9 @@ public class EditEmployeController {
     @FXML ComboBox<String> cbDeptEdit;
     @FXML ComboBox<String> cbContratEdit;
     @FXML TextField tfSalaireEdit;
+    @FXML
+    DatePicker datePickerRecrutementEdit;
+
 
     public MainController mainController;
     private Employe selectEmploye;
@@ -83,6 +87,7 @@ public class EditEmployeController {
         cbDeptEdit.setValue(employe.getDepartement());
         tfSalaireEdit.setText(String.valueOf(employe.getSalaire()));
         cbContratEdit.setValue(employe.getContrat());
+        datePickerRecrutementEdit.setValue(employe.getDateRecrutement());
     }
 
 
@@ -96,7 +101,7 @@ public class EditEmployeController {
     public void onSaveEdit() {
 
 
-        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue());
+        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue(), datePickerRecrutementEdit.getValue());
         DatabaseConnection.editEmploye(employe);
         retourMain();
     }

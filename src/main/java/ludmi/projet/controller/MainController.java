@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
@@ -16,6 +13,7 @@ import ludmi.projet.model.Employe;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +27,19 @@ public class MainController {
     @FXML TableColumn<Employe, Double> colSalaire;
     @FXML TableColumn<Employe, String> colContrat;
     @FXML TextField tfSearch;
+    @FXML ComboBox<String> cbFiltre;
 
+
+
+    private List<String> filtre = Arrays.asList(
+            "Informatique",
+            "Design",
+            "Management",
+            "Ressources humaines",
+            "Finances",
+            "Commercial",
+            "Infrastructure"
+    );
 
     //création d'une liste
     private ObservableList<Employe> employes = FXCollections.observableArrayList();
@@ -43,6 +53,8 @@ public class MainController {
         colDept.setCellValueFactory(new PropertyValueFactory<Employe, String>("departement"));
         colSalaire.setCellValueFactory(new PropertyValueFactory<Employe, Double>("salaire"));
         colContrat.setCellValueFactory(new PropertyValueFactory<Employe, String>("contrat"));
+        cbFiltre.getItems().addAll(filtre);
+
         //Employe employe1 = new Employe(0, "Ludmilla", "Zephir", "Dev", "Num", 2000);
         //Employe employe2 = new Employe(0, "Yarina", "Zephir", "Comptable", "Finance", 3000);
         //employes.add(employe1);
@@ -138,6 +150,7 @@ public class MainController {
         DatabaseConnection.deleteEmploye(id);
     }
 
+
     @FXML
     private void onDelete() {
 
@@ -158,12 +171,67 @@ public class MainController {
 
     }
 
+
+    /**
+     * methode onSearch : recherche employé dans la barre de recherche par texte ou par département
+     */
     @FXML
     private void onSearch(){
         //System.out.println("Recherche");
 
+
         String recherche = tfSearch.getText();
-        employes.setAll(DatabaseConnection.getSelect(recherche));
+        String r =  cbFiltre.getSelectionModel().getSelectedItem();
+
+        if(r == null){
+            employes.setAll(DatabaseConnection.getSelect(recherche));
+        }else {
+            employes.setAll(DatabaseConnection.getSelect(recherche, r));
+        }
+
+
+
+
+    }
+
+    /**
+     * methode onRead permet la lecture de la fiche d'un employé
+     */
+    @FXML
+    public void onRead(){
+
+        Employe select = tableEmployes.getSelectionModel().getSelectedItem();
+
+        if(select == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setContentText("Veuillez selectionner un employé");
+            alert.showAndWait();
+        }else {
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/ficheEmploye.fxml"));
+
+            try {
+                Scene scene = new Scene(loader.load());
+
+                FicheEmployeController ficheEmployeController = loader.getController();
+                ficheEmployeController.setMainController(this);
+                ficheEmployeController.setEmploye(select);
+
+
+
+                Main.stage.setScene(scene
+                );
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
+
+
+
 
 
     }
@@ -172,4 +240,8 @@ public class MainController {
 
 
 
-}
+
+
+
+
+
