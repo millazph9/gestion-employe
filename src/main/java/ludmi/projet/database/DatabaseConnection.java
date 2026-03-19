@@ -14,6 +14,7 @@ public class DatabaseConnection {
         return DriverManager.getConnection(URL);
     }
 
+
     public static void initDatabase(){
         String sql = """
                CREATE TABLE IF NOT EXISTS employe(
@@ -36,11 +37,11 @@ public class DatabaseConnection {
 
     }
 
+
     /**
      * Methode addEmploye() ajout d'un employé
      * @param employe
      */
-
     public static void addEmploye(Employe employe){
 
         String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat, dateRecrutement) VALUES (?,?,?,?,?,?,?)";
@@ -58,6 +59,22 @@ public class DatabaseConnection {
             stmt.executeUpdate();
 
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static void addImage(Employe em){
+
+        String sql = "UPDATE employe SET image = ? WHERE id = ?";
+        try(Connection conn = getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, em.getImage());
+            stmt.setInt(2, em.getId());
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -129,7 +146,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery("SELECT * from employe");
 
             while(res.next()){
-                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
+                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
                 liste.add(employe);
             }
         }catch(SQLException e){
@@ -159,7 +176,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery();
 
             while (res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
                 list.add(e);
             }
 
@@ -188,7 +205,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery();
 
             while(res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
                 list.add(e);
             }
         } catch (SQLException e) {

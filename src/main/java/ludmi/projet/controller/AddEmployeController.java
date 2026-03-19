@@ -148,7 +148,7 @@ public class AddEmployeController {
         //int id = mainController.getEmployes().size() + 1;
 
         //Création de l'employé
-        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat, dateRecrutement);
+        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat, dateRecrutement, null);
 
        if(DatabaseConnection.select(nom, prenom)){
            System.out.println("non");

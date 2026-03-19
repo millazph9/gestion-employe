@@ -4,20 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import ludmi.projet.app.Main;
+import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
-import org.w3c.dom.Text;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDate;
+
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+
+
 
 public class FicheEmployeController extends Component {
 
@@ -28,6 +30,7 @@ public class FicheEmployeController extends Component {
     @FXML TextField tfSalaryRead;
     @FXML TextField tfContratRead;
     @FXML TextField tfDatePickerRecrutementRead;
+    @FXML ImageView viewImg;
 
     public MainController mainController;
     public Employe selectEmploye;
@@ -36,6 +39,8 @@ public class FicheEmployeController extends Component {
     public void setMainController(MainController maincontroller){
         this.mainController = maincontroller;
     }
+
+
 
     public void setEmploye(Employe employe){
         this.selectEmploye = employe;
@@ -46,40 +51,53 @@ public class FicheEmployeController extends Component {
         tfSalaryRead.setText(String.valueOf(employe.getSalaire()));
         tfContratRead.setText(employe.getContrat());
         tfDatePickerRecrutementRead.setText(employe.getDateRecrutement().toString());
+
+        if(employe.getImage() == null){
+            Image oui = new Image(Main.class.getResource("/par_defaut.png").toString());
+            viewImg.setImage(oui);
+
+        }else{
+            Image ok = new Image(employe.getImage());
+            viewImg.setImage(ok);
+        }
+
+
+
+
     }
+
+    public static void initialize(){
+
+    }
+
 
     @FXML
     private void onAddPic(){
 
 
-        try {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Ouvrir fichier");
+        chooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*jpg", "*png")
+        );
 
-            JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "JPG & GIF Images", "jpg");
-            chooser.setFileFilter(filter);
-            chooser.showOpenDialog(this);
-            File f = chooser.getSelectedFile();
-            String fileName = f.getAbsolutePath();
-            String cheminFinal = "images";
-            File directory = new File(cheminFinal);
-            if(!directory.exists()){
-                directory.mkdir();
-            }
-
-            File sourceFile = new File(fileName);
-            File destination = new File("image/" + selectEmploye + ".jpg");
-            Files.copy(sourceFile.toPath(), destination.toPath());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        File selectedFile = chooser.showOpenDialog(Main.stage);
+        if(selectedFile != null ){
+            Image image = new Image(selectedFile.toURI().toString());
+            viewImg.setImage(image);
         }
 
+        Employe em = new Employe(selectEmploye.getId(), tfNameRead.getText(),tfFNameRead.getText(), tfPostRead.getText(), tfDeptRead.getText(), Double.parseDouble(tfSalaryRead.getText()), tfContratRead.getText(), LocalDate.parse(tfDatePickerRecrutementRead.getText()), selectedFile.getAbsolutePath());
+        DatabaseConnection.addImage(em);
 
-        try{
 
-        }catch (Exception e){
 
-        }
+
+
+
+
+
+
 
     }
 

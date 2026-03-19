@@ -10,6 +10,7 @@ import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +89,7 @@ public class EditEmployeController {
         tfSalaireEdit.setText(String.valueOf(employe.getSalaire()));
         cbContratEdit.setValue(employe.getContrat());
         datePickerRecrutementEdit.setValue(employe.getDateRecrutement());
+
     }
 
 
@@ -101,7 +103,7 @@ public class EditEmployeController {
     public void onSaveEdit() {
 
 
-        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue(), datePickerRecrutementEdit.getValue());
+        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue(), datePickerRecrutementEdit.getValue(), selectEmploye.getImage());
         DatabaseConnection.editEmploye(employe);
         retourMain();
     }
