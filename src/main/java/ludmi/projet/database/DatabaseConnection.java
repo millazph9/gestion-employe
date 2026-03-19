@@ -3,6 +3,7 @@ package ludmi.projet.database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ludmi.projet.model.Employe;
+import ludmi.projet.model.User;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -41,17 +42,20 @@ public class DatabaseConnection {
 
         String sql = """
                 
-                CREATE IF TABLE IF NOT EXISTS employe(
+                CREATE TABLE IF NOT EXISTS user(
                 
-                id INTEGER KEY PRIMARY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user TEXT,
-                password LONGTEXT
+                password TEXT
                 
                 )
                 """;
+        String sqll = "INSERT OR IGNORE INTO user (user, password) VALUES ('admin', 'admin10')";
 
         try (Connection conn = getConnection();
         Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            stmt.execute(sqll);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -290,6 +294,26 @@ public class DatabaseConnection {
 
        // return em;
     //}
+
+    public static boolean connexionUser(String user, String password){
+        String sql = "SELECT * FROM user WHERE user = ? AND password = ?";
+
+        try(
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+
+            stmt.setString(1, user);
+            stmt.setString(2, password);
+
+            ResultSet res = stmt.executeQuery();
+
+            return res.next();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

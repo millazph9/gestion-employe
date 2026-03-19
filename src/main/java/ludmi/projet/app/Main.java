@@ -26,7 +26,7 @@ public class Main extends  Application{
         DatabaseConnection.initUser();
 
         Main.stage = stage; // fenêtre
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/authentification.fxml"));
         Scene scene = new Scene(loader.load()); //création d'une scene et stockage fichier fxml stocké dans loader
         stage.setTitle("Gestion des employés");
         stage.setScene(scene); //affichage de la scene
