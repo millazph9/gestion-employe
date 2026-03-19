@@ -23,6 +23,7 @@ public class Main extends  Application{
     public void start(Stage stage) throws Exception {
 
         DatabaseConnection.initDatabase();
+        DatabaseConnection.initUser();
 
         Main.stage = stage; // fenêtre
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main.fxml"));

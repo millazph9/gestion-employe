@@ -37,6 +37,26 @@ public class DatabaseConnection {
 
     }
 
+    public static void initUser(){
+
+        String sql = """
+                
+                CREATE IF TABLE IF NOT EXISTS employe(
+                
+                id INTEGER KEY PRIMARY AUTOINCREMENT,
+                user TEXT,
+                password LONGTEXT
+                
+                )
+                """;
+
+        try (Connection conn = getConnection();
+        Statement stmt = conn.createStatement()) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     /**
      * Methode addEmploye() ajout d'un employé
