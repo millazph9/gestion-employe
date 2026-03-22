@@ -30,6 +30,8 @@
             <Button fx:id="btnBack" layoutX="303.0" layoutY="348.0" mnemonicParsing="false" onAction="#onCloseRead" text="Retour" />
             <Button fx:id="btnPic" layoutX="49.0" layoutY="264.0" mnemonicParsing="false" onAction="#onAddPic" prefHeight="30.0" prefWidth="195.0" text="Ajouter une photo" />
             <ImageView fx:id="viewImg" fitHeight="150.0" fitWidth="200.0" layoutX="47.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="458.0" layoutY="268.0" text="Civilite" />
+            <TextField fx:id="tfCivilite" layoutX="456.0" layoutY="290.0" prefHeight="26.0" prefWidth="118.0" />
          </children>
       </Pane>
    </center>

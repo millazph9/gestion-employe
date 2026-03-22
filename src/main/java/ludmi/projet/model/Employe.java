@@ -18,8 +18,9 @@ public class Employe {
     private String contrat;
     private LocalDate dateRecrutement;
     private String image;
+    private String civilite;
 
-    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire, String contrat, LocalDate dateRecrutement, String image) {
+    public Employe(int id, String nom, String prenom, String poste, String departement, double salaire, String contrat, LocalDate dateRecrutement, String image, String civilite) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -29,6 +30,7 @@ public class Employe {
         this.contrat = contrat;
         this.dateRecrutement = dateRecrutement;
         this.image = image;
+        this.civilite = civilite;
     }
 
 
@@ -107,5 +109,13 @@ public class Employe {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getCivilite() {
+        return civilite;
+    }
+
+    public void setCivilite(String civilite) {
+        this.civilite = civilite;
     }
 }

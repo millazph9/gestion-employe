@@ -78,9 +78,10 @@
                </HBox.margin></Button>
             <Button fx:id="btnRead" mnemonicParsing="false" onAction="#onRead" text="Voir">
                <HBox.margin>
-                  <Insets />
+                  <Insets right="5.0" />
                </HBox.margin>
             </Button>
+            <Button fx:id="btnRead1" mnemonicParsing="false" onAction="#onOut" text="Se deconnecter" />
          </children>
       </HBox>
    </bottom>

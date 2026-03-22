@@ -228,12 +228,25 @@ public class MainController {
                 throw new RuntimeException(e);
             }
         }
+
+
     }
 
+    @FXML
+    public void onOut(){
 
+        FXMLLoader loader = new FXMLLoader (Main.class.getResource("/fxml/authentification.fxml"));
 
+        try{
+            Scene scene = new Scene(loader.load());
 
+            Main.stage.setScene(scene);
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
     }

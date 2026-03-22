@@ -45,7 +45,7 @@ public class DatabaseConnection {
                 CREATE TABLE IF NOT EXISTS user(
                 
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user TEXT,
+                user TEXT UNIQUE,
                 password TEXT
                 
                 )
@@ -68,7 +68,7 @@ public class DatabaseConnection {
      */
     public static void addEmploye(Employe employe){
 
-        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat, dateRecrutement) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO employe (prenom, nom, poste, departement, salaire, contrat, dateRecrutement, civilite) VALUES (?,?,?,?,?,?,?,?)";
 
         try(Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -80,6 +80,7 @@ public class DatabaseConnection {
             stmt.setDouble(5, employe.getSalaire());
             stmt.setString(6, employe.getContrat());
             stmt.setString(7, employe.getDateRecrutement().toString());
+            stmt.setString(8, employe.getCivilite());
             stmt.executeUpdate();
 
             }
@@ -132,7 +133,7 @@ public class DatabaseConnection {
      */
 
     public static void editEmploye(Employe employe){
-        String sql = "UPDATE employe SET nom = ?, prenom = ?, poste = ?, departement = ?, salaire = ?, contrat = ?, dateRecrutement = ? WHERE id = ?" ;
+        String sql = "UPDATE employe SET nom = ?, prenom = ?, poste = ?, departement = ?, salaire = ?, contrat = ?, dateRecrutement = ?, civilite = ? WHERE id = ?" ;
 
         try(Connection conn = getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -143,9 +144,11 @@ public class DatabaseConnection {
             stmt.setString(3, employe.getPoste());
             stmt.setString(4, employe.getDepartement());
             stmt.setDouble(5, employe.getSalaire());
-            stmt.setInt(6, employe.getId());
-            stmt.setString(7, employe.getContrat());
-            stmt.setString(8, employe.getDateRecrutement().toString());
+            stmt.setString(6, employe.getContrat());
+            stmt.setString(7, employe.getDateRecrutement().toString());
+            stmt.setString(8, employe.getCivilite());
+            stmt.setInt(9, employe.getId());
+
 
             stmt.executeUpdate();
 
@@ -170,7 +173,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery("SELECT * from employe");
 
             while(res.next()){
-                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
+                Employe employe = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"), res.getString("civilite"));
                 liste.add(employe);
             }
         }catch(SQLException e){
@@ -200,7 +203,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery();
 
             while (res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"), res.getString("civilite"));
                 list.add(e);
             }
 
@@ -214,7 +217,7 @@ public class DatabaseConnection {
 
         ObservableList<Employe> list = FXCollections.observableArrayList();
 
-        String sql = "SELECT * from employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ?";
+        String sql = "SELECT * from employe WHERE nom LIKE ? OR prenom LIKE ? OR poste LIKE ? OR departement LIKE ? OR contrat LIKE ? OR civilite LIKE ?";
 
         try(
                 Connection conn = getConnection();
@@ -229,7 +232,7 @@ public class DatabaseConnection {
             ResultSet res = stmt.executeQuery();
 
             while(res.next()){
-                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"));
+                Employe e = new Employe(res.getInt("id"), res.getString("nom"), res.getString("prenom"), res.getString("poste"), res.getString("departement"), res.getDouble("salaire"), res.getString("contrat"), LocalDate.parse(res.getString("dateRecrutement")), res.getString("image"), res.getString("civilite"));
                 list.add(e);
             }
         } catch (SQLException e) {

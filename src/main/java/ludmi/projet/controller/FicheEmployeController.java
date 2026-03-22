@@ -31,9 +31,10 @@ public class FicheEmployeController extends Component {
     @FXML TextField tfContratRead;
     @FXML TextField tfDatePickerRecrutementRead;
     @FXML ImageView viewImg;
+    @FXML TextField tfCivilite;
 
     public MainController mainController;
-    public Employe selectEmploye;
+    private Employe selectEm;
 
 
     public void setMainController(MainController maincontroller){
@@ -43,7 +44,7 @@ public class FicheEmployeController extends Component {
 
 
     public void setEmploye(Employe employe){
-        this.selectEmploye = employe;
+        this.selectEm = employe;
         tfFNameRead.setText(employe.getNom());
         tfNameRead.setText(employe.getPrenom());
         tfPostRead.setText(employe.getPoste());
@@ -51,6 +52,7 @@ public class FicheEmployeController extends Component {
         tfSalaryRead.setText(String.valueOf(employe.getSalaire()));
         tfContratRead.setText(employe.getContrat());
         tfDatePickerRecrutementRead.setText(employe.getDateRecrutement().toString());
+        tfCivilite.setText(employe.getCivilite());
 
         if(employe.getImage() == null){
             Image oui = new Image(Main.class.getResource("/par_defaut.png").toString());
@@ -66,9 +68,7 @@ public class FicheEmployeController extends Component {
 
     }
 
-    public static void initialize(){
 
-    }
 
 
     @FXML
@@ -87,7 +87,7 @@ public class FicheEmployeController extends Component {
             viewImg.setImage(image);
         }
 
-        Employe em = new Employe(selectEmploye.getId(), tfNameRead.getText(),tfFNameRead.getText(), tfPostRead.getText(), tfDeptRead.getText(), Double.parseDouble(tfSalaryRead.getText()), tfContratRead.getText(), LocalDate.parse(tfDatePickerRecrutementRead.getText()), selectedFile.getAbsolutePath());
+        Employe em = new Employe(selectEm.getId(), tfNameRead.getText(),tfFNameRead.getText(), tfPostRead.getText(), tfDeptRead.getText(), Double.parseDouble(tfSalaryRead.getText()), tfContratRead.getText(), LocalDate.parse(tfDatePickerRecrutementRead.getText()), selectedFile.getAbsolutePath(), tfCivilite.getText());
         DatabaseConnection.addImage(em);
 
 

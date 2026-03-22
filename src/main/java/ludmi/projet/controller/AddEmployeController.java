@@ -27,9 +27,15 @@ public class AddEmployeController {
     @FXML TextField tfSalary;
     @FXML ComboBox<String> cbContrat;
     @FXML DatePicker datePickerRecrutement;
+    @FXML ComboBox<String> cbCivilite;
 
     private Employe e;
 
+
+    private List<String> civilites = Arrays.asList(
+            "Madame",
+            "Monsieur"
+    );
 
     private List<String> postes = Arrays.asList(
             "Developpeur web",
@@ -71,6 +77,7 @@ public class AddEmployeController {
         cbPoste.getItems().addAll(postes);
         cbDept.getItems().addAll(departements);
         cbContrat.getItems().addAll(contrat);
+        cbCivilite.getItems().addAll(civilites);
     }
 
 
@@ -114,6 +121,15 @@ public class AddEmployeController {
             alert.showAndWait();
         }
 
+        if(cbCivilite.getValue().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention");
+            alert.setContentText("Veuillez remplir le champ");
+            alert.showAndWait();
+            return;
+
+        }
+
 
         String nom = tfFName.getText();
         String prenom = tfName.getText();
@@ -122,6 +138,7 @@ public class AddEmployeController {
         double salaire;
         String contrat = cbContrat.getValue();
         LocalDate dateRecrutement = datePickerRecrutement.getValue();
+        String civilite = cbCivilite.getValue();
 
        try{
            salaire = Double.parseDouble(tfSalary.getText());
@@ -148,7 +165,7 @@ public class AddEmployeController {
         //int id = mainController.getEmployes().size() + 1;
 
         //Création de l'employé
-        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat, dateRecrutement, null);
+        Employe employe = new Employe(0, nom, prenom, poste, departement, salaire, contrat, dateRecrutement, null, civilite);
 
        if(DatabaseConnection.select(nom, prenom)){
            System.out.println("non");

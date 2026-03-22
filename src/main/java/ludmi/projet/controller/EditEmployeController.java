@@ -25,6 +25,7 @@ public class EditEmployeController {
     @FXML TextField tfSalaireEdit;
     @FXML
     DatePicker datePickerRecrutementEdit;
+    @FXML ComboBox<String> cbCiviliteEdit;
 
 
     public MainController mainController;
@@ -35,7 +36,13 @@ public class EditEmployeController {
     }
 
 
-    List<String> postes = Arrays.asList(
+
+    private List<String> civilites = Arrays.asList(
+            "Madame",
+            "Monsieur"
+    );
+
+    private List<String> postes = Arrays.asList(
             "Developpeur web",
             "Ingénieur DevOps",
             "Testeur",
@@ -49,7 +56,7 @@ public class EditEmployeController {
             "Commercial"
     );
 
-    List<String> departements = Arrays.asList(
+    private List<String> departements = Arrays.asList(
             "Informatique",
             "Design",
             "Management",
@@ -59,7 +66,7 @@ public class EditEmployeController {
             "Infrastructure"
     );
 
-    List<String> contrats = Arrays.asList(
+    private List<String> contrats = Arrays.asList(
             "CDD",
             "CDI",
             "Interminent",
@@ -74,6 +81,7 @@ public class EditEmployeController {
         cbPosteEdit.getItems().addAll(postes);
         cbDeptEdit.getItems().addAll(departements);
         cbContratEdit.getItems().addAll(contrats);
+        cbCiviliteEdit.getItems().addAll(civilites);
     }
 
     /**
@@ -89,6 +97,7 @@ public class EditEmployeController {
         tfSalaireEdit.setText(String.valueOf(employe.getSalaire()));
         cbContratEdit.setValue(employe.getContrat());
         datePickerRecrutementEdit.setValue(employe.getDateRecrutement());
+        cbCiviliteEdit.setValue((employe.getCivilite()));
 
     }
 
@@ -103,7 +112,7 @@ public class EditEmployeController {
     public void onSaveEdit() {
 
 
-        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue(), datePickerRecrutementEdit.getValue(), selectEmploye.getImage());
+        Employe employe = new Employe(selectEmploye.getId(), tfFNameEdit.getText(), tfNameEdit.getText(), cbPosteEdit.getValue(), cbDeptEdit.getValue(), Double.parseDouble(tfSalaireEdit.getText()), cbContratEdit.getValue(), datePickerRecrutementEdit.getValue(), selectEmploye.getImage(), cbCiviliteEdit.getValue());
         DatabaseConnection.editEmploye(employe);
         retourMain();
     }

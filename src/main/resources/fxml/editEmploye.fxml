@@ -23,13 +23,13 @@
          <children>
             <Label layoutX="209.0" layoutY="23.0" text="Id" visible="false" />
             <TextField fx:id="tfId" layoutX="209.0" layoutY="39.0" visible="false" />
-            <Label layoutX="42.0" layoutY="64.0" text="Nom" />
-            <Label layoutX="42.0" layoutY="133.0" text="Prénom" />
+            <Label layoutX="42.0" layoutY="132.0" text="Nom" />
+            <Label layoutX="42.0" layoutY="193.0" text="Prénom" />
             <Label layoutX="227.0" layoutY="64.0" text="Poste" />
             <Label layoutX="228.0" layoutY="134.0" text="Département" />
             <Label layoutX="409.0" layoutY="133.0" text="Salaire" />
-            <TextField fx:id="tfFNameEdit" layoutX="41.0" layoutY="89.0" />
-            <TextField fx:id="tfNameEdit" layoutX="41.0" layoutY="157.0" />
+            <TextField fx:id="tfFNameEdit" layoutX="41.0" layoutY="157.0" />
+            <TextField fx:id="tfNameEdit" layoutX="41.0" layoutY="218.0" />
             <TextField fx:id="tfSalaireEdit" layoutX="408.0" layoutY="156.0" />
             <Button fx:id="btnSaveEdit" layoutX="23.0" layoutY="306.0" mnemonicParsing="false" onAction="#onSaveEdit" prefHeight="25.0" prefWidth="70.0" text="Modifier" />
             <Button fx:id="btnCloseEdit" layoutX="97.0" layoutY="306.0" mnemonicParsing="false" onAction="#onCloseEdit" prefHeight="25.0" prefWidth="70.0" text="Annuler" />
@@ -39,6 +39,8 @@
             <Label layoutX="408.0" layoutY="61.0" text="Type de contrat" />
             <DatePicker fx:id="datePickerRecrutementEdit" layoutX="409.0" layoutY="219.0" />
             <Label layoutX="409.0" layoutY="196.0" text="Date de recrutement" />
+            <ComboBox fx:id="cbCiviliteEdit" layoutX="41.0" layoutY="87.0" prefWidth="150.0" promptText="Choisissez..." />
+            <Label layoutX="42.0" layoutY="62.0" text="Civilite" />
          </children>
       </Pane>
    </children>
