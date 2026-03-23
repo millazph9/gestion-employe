@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa5c2c8e-cc36-46c3-973e-db72f6ebc8ea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employe.db" beforeDir="false" afterPath="$PROJECT_DIR$/employe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ludmi/projet/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ludmi/projet/controller/MainController.class" afterDir="false" />
-    </list>
+    <list default="true" id="fa5c2c8e-cc36-46c3-973e-db72f6ebc8ea" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +38,7 @@
   "keyToString": {
     "Maven.gestion-employe2 [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/export",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
