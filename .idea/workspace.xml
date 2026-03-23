@@ -5,27 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa5c2c8e-cc36-46c3-973e-db72f6ebc8ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/employe.db" beforeDir="false" afterPath="$PROJECT_DIR$/employe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/AddEmployeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/AddEmployeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/EditEmployeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/EditEmployeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/FicheEmployeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/FicheEmployeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/database/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ludmi/projet/model/Employe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ludmi/projet/model/Employe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/addEmploye.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/addEmploye.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/authentification.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/authentification.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/editEmploye.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/editEmploye.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ficheEmploye.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ficheEmploye.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/authentification.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/authentification.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ludmi/projet/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ludmi/projet/controller/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ludmi/projet/database/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ludmi/projet/database/DatabaseConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,14 +41,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.gestion-employe2 [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.gestion-employe2 [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/export",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

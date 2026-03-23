@@ -81,7 +81,15 @@
                   <Insets right="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnRead1" mnemonicParsing="false" onAction="#onOut" text="Se deconnecter" />
+            <Button mnemonicParsing="false" onAction="#onExport" text="Exporter">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnRead1" mnemonicParsing="false" onAction="#onOut" text="Se deconnecter">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
    </bottom>

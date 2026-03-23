@@ -7,14 +7,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.Employe;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainController {
@@ -30,6 +36,14 @@ public class MainController {
     @FXML ComboBox<String> cbFiltre;
 
 
+
+    //Délimiteurs qui voivent être dans le fichier CSV
+    private static final String DELIMITER = ";";
+    private static final String SEPARATOR ="\n";
+
+
+    //En-tête de fichier
+    private static final String HEADER = "Nom; Prénom; Poste; Département; Salaire; Contrat; Date de recrutement";
 
     private List<String> filtre = Arrays.asList(
             "Informatique",
@@ -248,8 +262,46 @@ public class MainController {
 
     }
 
+    @FXML
+    public void onExport() {
 
-    }
+        FileChooser choose = new FileChooser();
+        choose.setTitle("Choisir un dosiier");
+        choose.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Fichier csv", "csv")
+        );
+        choose.setInitialFileName("employe.csv");
+        File ok = choose.showSaveDialog(Main.stage);
+
+        if (ok != null) {
+            try (FileWriter file = new FileWriter(ok)) {
+                //Ajouter l'en-tête
+                file.append(HEADER);
+                //Ajouter une nouvelle ligne après l'en-tête
+                file.append(SEPARATOR);
+                for (Employe e : employes) {
+                    file.append(e.getNom());
+                    file.append(DELIMITER);
+                    file.append(e.getPrenom());
+                    file.append(DELIMITER);
+                    file.append(e.getPoste());
+                    file.append(DELIMITER);
+                    file.append(e.getDepartement());
+                    file.append(DELIMITER);
+                    file.append(String.valueOf(e.getSalaire()));
+                    file.append(DELIMITER);
+                    file.append(e.getContrat());
+                    file.append(DELIMITER);
+                    file.append(String.valueOf(e.getDateRecrutement()));
+                    file.append(SEPARATOR);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+        }
+    }}
 
 
 
