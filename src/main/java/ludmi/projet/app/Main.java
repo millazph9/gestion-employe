@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ludmi.projet.database.DatabaseConnection;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +18,9 @@ import static javafx.application.Application.launch;
 public class Main extends  Application{
 
     public static Stage stage;
+    public static GraphicsDevice myDevice;
+    public static Window myWindow;
+
 
 
     @Override
@@ -25,12 +29,16 @@ public class Main extends  Application{
         DatabaseConnection.initDatabase();
         DatabaseConnection.initUser();
 
+
         Main.stage = stage; // fenêtre
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/authentification.fxml"));
         Scene scene = new Scene(loader.load()); //création d'une scene et stockage fichier fxml stocké dans loader
         stage.setTitle("Gestion des employés");
-        stage.setScene(scene); //affichage de la scene
+        stage.setScene(scene);//affichage de la scene
+        stage.setMaximized(true);
         stage.show();
+
+
     }
 
 

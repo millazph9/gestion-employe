@@ -60,6 +60,8 @@ public class MainController {
 
 
     public void initialize() {
+        tableEmployes.setColumnResizePolicy(tableEmployes.CONSTRAINED_RESIZE_POLICY);
+
         //Je demande à afficher dans la colonne prénom la valeur prénom à l'aide de l'outil PropertyValueFactory ainsi de suite
         colPrenom.setCellValueFactory(new PropertyValueFactory<Employe, String>("prenom"));
         colNom.setCellValueFactory(new PropertyValueFactory<Employe, String>("nom"));
@@ -94,6 +96,7 @@ public class MainController {
             AddEmployeController addEmployeController = loader.getController();
             //Je lui défini le controller Main
             addEmployeController.setMainController(this);
+
 
             Main.stage.setScene(scene);
         } catch (IOException e) {

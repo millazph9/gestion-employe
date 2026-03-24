@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 
 
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 import ludmi.projet.app.Main;
 import ludmi.projet.database.DatabaseConnection;
 import ludmi.projet.model.User;
@@ -19,7 +20,6 @@ public class AuthentificationController {
     @FXML TextField tfPassword;
 
     private MainController mainController;
-
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
@@ -56,6 +56,8 @@ public class AuthentificationController {
                 Scene scene = new Scene(loader.load());
 
                 Main.stage.setScene(scene);
+
+
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
